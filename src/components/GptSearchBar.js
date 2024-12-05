@@ -25,7 +25,7 @@ const GptSearchBar = () => {
 
   const handleGptSearchClick = async () => {
   
-    console.log(searchText.current.value);
+    
 
     const gptQuery = "Act as a movie recommendation system and suggest some movies for the query : " + searchText.current.value + ". only give me names of five movies, comma seperated like the example result given ahead. Example result : Gadar, Sholay, Don, kuch kuch hota hai, Koi Mil Gaya"
 
@@ -39,14 +39,14 @@ const GptSearchBar = () => {
       console.log("gpt api failed");
       
     }
-    console.log(gptResults.choices?.[0]?.message?.content);
+    
     
     const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
     
     const promiseArray = gptMovies.map((movie)=> searchMovieTMDB(movie))
 
     const tmdbResults = await Promise.all(promiseArray)
-    console.log(tmdbResults);
+    
     
     dispatch(addGptMovieResult({movieNames : gptMovies ,movieResults : tmdbResults}))
 
